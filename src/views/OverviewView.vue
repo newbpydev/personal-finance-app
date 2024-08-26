@@ -1,10 +1,10 @@
 <template>
-  <div class="about">
+  <section class="">
     <h1>This is an about page</h1>
-  </div>
+  </section>
 </template>
 
-<style>
+<style lang="scss">
 @media (min-width: 1024px) {
   .about {
     min-height: 100vh;
