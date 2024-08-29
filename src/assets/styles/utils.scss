@@ -1,0 +1,62 @@
+@import 'variables';
+
+@mixin text-preset-1 {
+  font-size: 3.2rem;
+  line-height: 120%;
+  font-weight: bold;
+}
+
+@mixin text-preset-2 {
+  font-size: 2rem;
+  line-height: 120%;
+  font-weight: bold;
+}
+
+@mixin text-preset-3 {
+  font-size: 1.6rem;
+  line-height: 150%;
+  font-weight: bold;
+}
+
+@mixin text-preset-4 {
+  font-size: 1.4rem;
+  line-height: 150%;
+  font-weight: normal;
+}
+
+@mixin text-preset-4-bold {
+  font-size: 1.4rem;
+  line-height: 150%;
+  font-weight: bold;
+}
+
+@mixin text-preset-5 {
+  font-size: 1.2rem;
+  line-height: 150%;
+  font-weight: normal;
+}
+
+@mixin text-preset-5-bold {
+  font-size: 1.2rem;
+  line-height: 120%;
+  font-weight: bold;
+}
+
+// Media Query
+@mixin responsive($property, $mobile-value: none, $laptop-value: none, $desktop-value: none) {
+  @if $mobile-value != none {
+    #{$property}: $mobile-value;
+  }
+
+  @if $laptop-value != none {
+    @media (min-width: $laptop-width) {
+      #{$property}: $laptop-value;
+    }
+  }
+
+  @if $desktop-value != none {
+    @media (min-width: $desktop-width) {
+      #{$property}: $desktop-value;
+    }
+  }
+}

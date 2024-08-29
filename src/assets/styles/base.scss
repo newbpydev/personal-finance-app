@@ -1,86 +1,73 @@
-/* color palette from <https://github.com/vuejs/theme> */
+@import 'utils';
+
 :root {
-  --vt-c-white: #ffffff;
-  --vt-c-white-soft: #f8f8f8;
-  --vt-c-white-mute: #f2f2f2;
+  --c-beige-500: #98908b;
+  --c-beige-100: #f8f4f0;
 
-  --vt-c-black: #181818;
-  --vt-c-black-soft: #222222;
-  --vt-c-black-mute: #282828;
+  --c-grey-900: #201f24;
+  --c-grey-500: #696868;
+  --c-grey-300: #b3b3b3;
+  --c-grey-100: #f2f2f2;
 
-  --vt-c-indigo: #2c3e50;
+  --c-theme-green: #277c78;
+  --c-theme-yellow: #f2cdac;
+  --c-theme-cyan: #82c9d7;
+  --c-theme-navy: #626070;
+  --c-theme-red: #c94736;
+  --c-theme-purple: #826cb0;
+  --c-theme-purple-light: #af81ba;
+  --c-theme-turquoise: #597c7c;
+  --c-theme-brown: #93674f;
+  --c-theme-magenta: #934f6f;
+  --c-theme-blue: #3f82b2;
+  --c-theme-navy-grey: #97a0ac;
+  --c-theme-army-green: #7f9161;
+  --c-theme-gold: #cab361;
+  --c-theme-orange: #be6c49;
 
-  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
-  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
-  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
-  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
+  --c-white: #ffffff;
 
-  --vt-c-text-light-1: var(--vt-c-indigo);
-  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
-  --vt-c-text-dark-1: var(--vt-c-white);
-  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+  --c-bg: #F2F3F7;
+
+  --spacing-10: 4rem;
+  --spacing-8: 3.2rem;
+  --spacing-6: 2.4rem;
+  --spacing-5: 2rem;
+  --spacing-4: 1.6rem;
+  --spacing-3: 1.2rem;
+  --spacing-2: .8rem;
+  --spacing-1: .4rem;
+
+  --border-radius-sm: .8rem;
+  --border-radius-lg: 1.6rem;
 }
 
-/* semantic color variables for this project */
 :root {
-  --color-background: var(--vt-c-white);
-  --color-background-soft: var(--vt-c-white-soft);
-  --color-background-mute: var(--vt-c-white-mute);
-
-  --color-border: var(--vt-c-divider-light-2);
-  --color-border-hover: var(--vt-c-divider-light-1);
-
-  --color-heading: var(--vt-c-text-light-1);
-  --color-text: var(--vt-c-text-light-1);
-
-  --section-gap: 160px;
+  --color-background: var(--c-bg);
+  --color-background-dark: var(--c-grey-900);
+  --color-text: var(--c-grey-900);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: var(--vt-c-black);
-    --color-background-soft: var(--vt-c-black-soft);
-    --color-background-mute: var(--vt-c-black-mute);
-
-    --color-border: var(--vt-c-divider-dark-2);
-    --color-border-hover: var(--vt-c-divider-dark-1);
-
-    --color-heading: var(--vt-c-text-dark-1);
-    --color-text: var(--vt-c-text-dark-2);
-  }
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  font-weight: normal;
+html {
+  font-size: 62.5%;
 }
 
 body {
+  @include text-preset-4;
   min-height: 100vh;
   color: var(--color-text);
   background: var(--color-background);
-  transition:
-    color 0.5s,
-    background-color 0.5s;
-  line-height: 1.6;
-  font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    'Fira Sans',
-    'Droid Sans',
-    'Helvetica Neue',
-    sans-serif;
-  font-size: 15px;
+  font-family: 'Public Sans', sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  width: 100%;
+
+  @include responsive(padding,
+          var(--spacing-6, 2.4rem) var(--spacing-4, 1.6rem),
+          var(--spacing-8, 3.2rem) var(--spacing-10, 4rem)
+  );
 }
