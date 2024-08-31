@@ -3,9 +3,9 @@
 </script>
 
 <template>
-  <div>
+  <main>
     <h1>Transactions</h1>
-  </div>
+  </main>
 </template>
 
 <style scoped>

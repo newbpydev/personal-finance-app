@@ -38,23 +38,28 @@
 
 @mixin text-preset-5-bold {
   font-size: 1.2rem;
-  line-height: 120%;
+  line-height: 150%;
   font-weight: bold;
 }
 
-// Media Query
-@mixin responsive($property, $mobile-value: none, $laptop-value: none, $desktop-value: none) {
-  @if $mobile-value != none {
+/// Mixin for responsive properties
+/// Parameters:
+/// $property - The CSS property to apply
+/// $mobile-value - The value for mobile devices (optional)
+/// $laptop-value - The value for laptop devices (optional)
+/// $desktop-value - The value for desktop devices (optional)
+@mixin responsive($property: null, $mobile-value: null, $laptop-value: null, $desktop-value: null) {
+  @if $mobile-value != null {
     #{$property}: $mobile-value;
   }
 
-  @if $laptop-value != none {
+  @if $laptop-value != null {
     @media (min-width: $laptop-width) {
       #{$property}: $laptop-value;
     }
   }
 
-  @if $desktop-value != none {
+  @if $desktop-value != null {
     @media (min-width: $desktop-width) {
       #{$property}: $desktop-value;
     }

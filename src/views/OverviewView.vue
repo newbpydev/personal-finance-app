@@ -1,5 +1,5 @@
 <template>
-  <section class="">
+  <section class="container">
     <h1>This is an about page</h1>
   </section>
 </template>
@@ -13,3 +13,4 @@
   }
 }
 </style>
+<script lang="ts" setup></script>

@@ -55,6 +55,7 @@ html {
 body {
   @include text-preset-4;
   min-height: 100vh;
+  min-width: 37.5rem;
   color: var(--color-text);
   background: var(--color-background);
   font-family: 'Public Sans', sans-serif;

@@ -2,21 +2,26 @@ import { createRouter, createWebHistory } from 'vue-router'
 import OverviewView from '@/views/OverviewView.vue'
 import AuthView from '@/views/AuthView.vue'
 import TransactionsView from '@/views/TransactionsView.vue'
-import BudgetView from '@/views/BudgetView.vue'
+import BudgetsView from '@/views/BudgetsView.vue'
 import PotsView from '@/views/PotsView.vue'
 import RecurringBills from '@/views/RecurringBills.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    {
+    { //TODO: Reroute it before production
       path: '/',
+      name: 'home',
+      redirect: 'overview'
+    },
+    {
+      path: '/overview',
       name: 'overview',
       component: OverviewView
     },
     {
       path: '/auth',
-      name: 'overview',
+      name: 'auth',
       component: AuthView
     },
     {
@@ -25,9 +30,9 @@ const router = createRouter({
       component: TransactionsView
     },
     {
-      path: '/budget',
-      name: 'budget',
-      component: BudgetView
+      path: '/budgets',
+      name: 'budgets',
+      component: BudgetsView
     },
     {
       path: '/pots',
