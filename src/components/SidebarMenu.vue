@@ -72,7 +72,7 @@ const handleIsMinimized = () => {
     </nav>
 
     <button v-show="isDesktop" :class="{'btn': true, 'minimized': isMinimized}" @click="handleIsMinimized">
-      <MinimizeMenuIcon />
+      <MinimizeMenuIcon class="btn-icon" />
       <span class="text">Minimize Menu</span>
     </button>
   </header>
@@ -106,6 +106,11 @@ header {
       //display: block;
       animation: fadeIn .2s ease-in-out;
     }
+    .btn-icon {
+      animation: flip-back .2s ease-in-out;
+      transform: rotateY(0);
+    }
+
     &.minimized {
       min-width: 8.8rem;
       width: 8.8rem;
@@ -122,6 +127,12 @@ header {
       }
 
       & .btn {
+        & .btn-icon {
+          transform: rotateY(180deg);
+
+          animation: flip-around .2s ease-in-out;
+        }
+
         & .text {
           animation: fade-out .2 ease-in-out;
           opacity: 0;
@@ -269,7 +280,6 @@ header {
     padding: var(--spacing-4, 1.6rem) var(--spacing-8, 3.2rem);
     height: 5.6rem;
     margin-bottom: var(--spacing-8);
-
 
     & svg {
       height: 2.4rem;
