@@ -8,6 +8,9 @@ import RecurringBillsIcon from '@/components/icons/RecurringBillsIcon.vue'
 import LogoLarge from '@/components/icons/LogoLarge.vue'
 import LogoSmall from '@/components/icons/LogoSmall.vue'
 import MinimizeMenuIcon from '@/components/icons/MinimizeMenuIcon.vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const isMinimized = ref(false)
 
@@ -31,7 +34,7 @@ const handleIsMinimized = () => {
 
 <template>
   <header :class="{'minimized': isMinimized}">
-    <div v-show="isDesktop" class="logo">
+    <div v-show="isDesktop" class="logo" @click="router.push({name: 'overview'})">
       <Transition mode="out-in" name="fade">
         <LogoSmall v-if="isMinimized" />
         <LogoLarge v-else />
@@ -163,12 +166,17 @@ header {
 
   & .logo {
     display: flex;
-    //align-self: stretch;
-    //min-width: 2.2rem;
+    cursor: pointer;
     padding: var(--spacing-10) var(--spacing-8);
 
-    & svg {
+    & svg * {
+      transition: fill .2s;
       //min-width: 2.2rem;
+    }
+
+    &:hover svg * {
+      fill: var(--c-theme-green);
+
     }
   }
 
