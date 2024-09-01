@@ -32,8 +32,10 @@ const handleIsMinimized = () => {
 <template>
   <header :class="{'minimized': isMinimized}">
     <div v-show="isDesktop" class="logo">
-      <LogoSmall v-if="isMinimized" />
-      <LogoLarge v-else />
+      <Transition mode="out-in" name="fade">
+        <LogoSmall v-if="isMinimized" />
+        <LogoLarge v-else />
+      </Transition>
     </div>
 
     <nav>
@@ -82,6 +84,17 @@ const handleIsMinimized = () => {
 @import '../assets/styles/utils.scss';
 @import '../assets/styles/animations.scss';
 
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity .2s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: .9;
+}
+
+//.wrapper-
 header {
   background-color: var(--color-background-dark);
   display: inline-flex;
@@ -103,12 +116,16 @@ header {
     .text {
       min-width: 17.2rem;
       opacity: 1;
-      //display: block;
-      animation: fadeIn .2s ease-in-out;
+      animation: fade-in .2s ease-in-out;
     }
     .btn-icon {
       animation: flip-back .2s ease-in-out;
       transform: rotateY(0);
+    }
+
+    & .navigation-link .text {
+      //transition: transform .2s;
+
     }
 
     &.minimized {
@@ -123,19 +140,21 @@ header {
         &-link .text {
           animation: fade-out .2s ease-in-out;
           opacity: 0;
+          z-index: -10;
+          //transform: translateX(-30rem);
         }
       }
 
       & .btn {
         & .btn-icon {
           transform: rotateY(180deg);
-
           animation: flip-around .2s ease-in-out;
         }
 
         & .text {
           animation: fade-out .2 ease-in-out;
           opacity: 0;
+          z-index: -10;
         }
       }
     }
@@ -143,8 +162,14 @@ header {
 
 
   & .logo {
-    align-self: stretch;
+    display: flex;
+    //align-self: stretch;
+    //min-width: 2.2rem;
     padding: var(--spacing-10) var(--spacing-8);
+
+    & svg {
+      //min-width: 2.2rem;
+    }
   }
 
   & nav {
