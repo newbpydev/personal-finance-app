@@ -1,7 +1,10 @@
 <script lang="ts" setup>
+import DetailLink from '@/components/DetailLink.vue'
 
 defineProps<{
   title: string;
+  linkTitle?: string;
+  to?: string;
   isDark?: boolean,
   isStat?: boolean,
   gap?: 'sm' | 'md'
@@ -13,6 +16,9 @@ defineProps<{
   <article :class="{'card-wrapper': true, 'dark': isDark, 'stat': isStat, 'sm': gap === 'sm', 'md': gap === 'md' }">
     <header class="card-header">
       <h1>{{ title }}</h1>
+      <DetailLink :to="to">
+        {{ linkTitle }}
+      </DetailLink>
     </header>
 
     <section class="card-section">
@@ -71,6 +77,8 @@ defineProps<{
 
   &-header {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
 
     & h1 {
       @include u.text-preset-2();

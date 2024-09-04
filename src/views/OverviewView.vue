@@ -42,12 +42,13 @@ onMounted(() => {
         </template>
       </card-wrapper>
     </div>
+    <!--    TODO: Review the loading element-->
     <div v-else>Loading Balance</div>
 
     <div class="overview-wrapper">
       <div class="col-1">
         <div class="overview-pots">
-          <card-wrapper :is-dark="false" :is-stat="false" gap="sm" title="Pots">
+          <card-wrapper :is-dark="false" :is-stat="false" gap="sm" link-title="See Details" title="Pots" to="/pots">
             <span>Total: {{ potsStore.getTotalSaved }}</span>
           </card-wrapper>
         </div>
@@ -102,7 +103,6 @@ onMounted(() => {
     & .col-1 {
       display: flex;
       flex-direction: column;
-      //width: 60.8rem;
       @include u.responsive(width, 100%, null, 60.8rem);
       @include u.responsive(gap, var(--spacing-4), var(--spacing-6));
     }
