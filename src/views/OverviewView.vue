@@ -54,8 +54,7 @@ onMounted(() => {
         </div>
 
         <div class="overview-transactions">
-          <card-wrapper gap="md" title="Transactions">
-
+          <card-wrapper gap="md" link-title="View All" title="Transactions" to="/transactions">
             <OverviewTransactionList :transactions="lastFiveTransactions" />
           </card-wrapper>
         </div>
@@ -64,11 +63,11 @@ onMounted(() => {
 
       <div class="col-2">
         <div class="overview-budgets">
-          <card-wrapper gap="sm" title="Budgets"></card-wrapper>
+          <card-wrapper gap="sm" link-title="See Details" title="Budgets" to="/budgets"></card-wrapper>
         </div>
 
         <div class="overview-recurring">
-          <card-wrapper gap="sm" title="Recurring Bills"></card-wrapper>
+          <card-wrapper gap="sm" link-title="See Details" title="Recurring Bills" to="/recurring-bills"></card-wrapper>
         </div>
       </div>
     </div>

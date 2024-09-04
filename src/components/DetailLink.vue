@@ -25,7 +25,7 @@ defineProps<{
 
   & svg {
     fill: var(--c-grey-500);
-    transition: fill .2s;
+    transition: all .2s;
   }
 
   &:hover {
@@ -33,6 +33,7 @@ defineProps<{
 
     & svg {
       fill: var(--c-grey-900);
+      transform: translateX(.5rem);
     }
   }
 
