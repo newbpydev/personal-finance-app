@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <main>
+  <main class="container transactions-page">
     <h1>Transactions</h1>
   </main>
 </template>

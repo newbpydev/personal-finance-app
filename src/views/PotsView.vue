@@ -3,9 +3,9 @@
 </script>
 
 <template>
-  <section>
+  <main class="container pots-page">
     <h1>Pots</h1>
-  </section>
+  </main>
 </template>
 
 <style scoped>

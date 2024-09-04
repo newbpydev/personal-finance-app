@@ -3,9 +3,9 @@
 </script>
 
 <template>
-  <section>
+  <main class="container budgets-page">
     <h1>Budget</h1>
-  </section>
+  </main>
 </template>
 
 <style scoped>

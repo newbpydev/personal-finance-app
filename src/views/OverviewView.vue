@@ -1,16 +1,86 @@
+<script lang="ts" setup>
+import CardWrapper from '@/components/CardWrapper.vue'
+import { useBalanceStore } from '@/stores/balance'
+import { computed, onMounted } from 'vue'
+import { formatCurrency } from '@/utils/currency'
+import { usePotsStore } from '@/stores/pots'
+import { useTransactionStore } from '@/stores/transactions'
+import OverviewTransactionList from '@/components/OverviewTransactionList.vue'
+
+
+const balanceStore = useBalanceStore()
+const potsStore = usePotsStore()
+const transactionsStore = useTransactionStore()
+
+const lastFiveTransactions = computed(() => transactionsStore.transactions.slice(0, 5))
+
+onMounted(() => {
+  balanceStore.fetchBalance()
+  potsStore.fetchPots()
+  transactionsStore.fetchTransactions()
+})
+</script>
+
 <template>
-  <section class="container">
-    <h1>This is an about page</h1>
-  </section>
+  <main class="container overview-page">
+    <h1>Overview</h1>
+
+    <div v-if="balanceStore.balance" class="overview-stats">
+      <card-wrapper :is-dark="true" :is-stat="true" title="Current Balance">
+        <template #default>
+          <span>{{ formatCurrency(balanceStore.balance.current) }}</span>
+        </template>
+      </card-wrapper>
+      <card-wrapper :is-dark="false" :is-stat="true" title="Current Balance">
+        <template #default>
+          <span>{{ formatCurrency(balanceStore.balance.income) }}</span>
+        </template>
+      </card-wrapper>
+      <card-wrapper :is-dark="false" :is-stat="true" title="Current Balance">
+        <template #default>
+          <span>{{ formatCurrency(balanceStore.balance.expenses) }}</span>
+        </template>
+      </card-wrapper>
+    </div>
+    <div v-else>Loading Balance</div>
+
+    <div class="overview-pots">
+      <card-wrapper :is-dark="false" :is-stat="false" gap="sm" title="Pots">
+        <span>Total: {{ potsStore.getTotalSaved }}</span>
+      </card-wrapper>
+    </div>
+
+    <div class="overview-transactions">
+      <card-wrapper gap="md" title="Transactions">
+
+        <OverviewTransactionList :transactions="lastFiveTransactions" />
+      </card-wrapper>
+    </div>
+
+    <div class="overview-Budgets">
+      <card-wrapper gap="sm" title="Budgets"></card-wrapper>
+    </div>
+  </main>
 </template>
 
 <style lang="scss">
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
+@use "../assets/styles/utils" as u;
+
+.overview {
+  &-page {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    flex: 1 0 0;
+    gap: var(--spacing-8);
+  }
+
+  &-stats {
+    display: flex;
+    @include u.responsive(flex-direction, column, row);
+
+    & {
+      @include u.responsive(gap, var(--spacing-3), var(--spacing-6));
+    }
   }
 }
 </style>
-<script lang="ts" setup></script>

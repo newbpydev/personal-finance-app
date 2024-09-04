@@ -50,7 +50,10 @@
 /// $desktop-value - The value for desktop devices (optional)
 @mixin responsive($property: null, $mobile-value: null, $laptop-value: null, $desktop-value: null) {
   @if $mobile-value != null {
-    #{$property}: $mobile-value;
+    & {
+      #{$property}: $mobile-value;
+
+    }
   }
 
   @if $laptop-value != null {

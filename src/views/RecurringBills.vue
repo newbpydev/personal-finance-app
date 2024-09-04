@@ -3,9 +3,9 @@
 </script>
 
 <template>
-  <section>
+  <main class="container recurring-bills-page">
     <h1>Recurring Bills</h1>
-  </section>
+  </main>
 </template>
 
 <style scoped>

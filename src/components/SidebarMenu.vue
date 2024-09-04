@@ -104,16 +104,16 @@ header {
   align-items: flex-start;
   gap: var(--spacing-6, 2.4rem);
   color: var(--c-grey-300);
+  min-width: 30rem;
+  transition: min-width .3s, width .3s;
   @include responsive(flex-direction, null, null, column);
   @include responsive(border-radius,
     var(--border-radius-sm) var(--border-radius-sm) 0 0,
     null,
     0 var(--border-radius-lg) var(--border-radius-lg) 0
   );
-  min-width: 30rem;
   @include responsive(width, null, null, 30rem);
   @include responsive(padding-bottom, null, null, var(--spacing-6, 2.4rem));
-  transition: min-width .3s, width .3s;
 
   @media (min-width: 90em) {
     .text {
@@ -218,12 +218,16 @@ header {
 
     &-link {
       display: flex;
+      align-items: center;
+      transition-timing-function: ease;
+      fill: var(--c-grey-300);
+      transition-property: fill, color, background-color;
+      transition-duration: .3s;
       //gap: var(--spacing-1, .4rem);
       //flex: 1 0 0;
       @include text-preset-5-bold();
       //justify-content: center;
       //width: clamp(6.86rem, 10.4rem, 100%);
-      align-items: center;
       @include responsive(gap, null, var(--spacing-1), var(--spacing-4));
       @include responsive(width, 6.86rem, 10.4rem, 100%);
       //padding: var(--spacing-2, .8rem) 0 var(--spacing-3, 1.2rem);
@@ -232,10 +236,6 @@ header {
         null,
         var(--spacing-4) var(--spacing-8)
       );
-      fill: var(--c-grey-300);
-      transition-property: fill, color, background-color;
-      transition-duration: .3s;
-      transition-timing-function: ease;
       //@include responsive(height, null, null, 5.6rem);
       @include responsive(align-self, null, null, stretch);
       @include responsive(flex-direction, column, null, row);
@@ -263,6 +263,7 @@ header {
       &.router-link-active {
         background-color: var(--c-beige-100);
         color: var(--c-grey-900);
+        fill: var(--c-theme-green);
         @include responsive(border-radius,
           var(--border-radius-sm) var(--border-radius-sm) 0 0,
           null,
@@ -270,7 +271,6 @@ header {
         );
         @include responsive(border-bottom, var(--spacing-1, .4rem) solid var(--c-theme-green), null, none);
         @include responsive(border-left, null, null, var(--spacing-1, .4rem) solid var(--c-theme-green));
-        fill: var(--c-theme-green);
       }
 
       &.minimized {
@@ -306,13 +306,13 @@ header {
   & .btn {
     display: flex;
     gap: var(--spacing-4, 1.6rem);
-    @include text-preset-3();
     color: var(--c-grey-300);
     text-align: left;
     //align-items: center;
     padding: var(--spacing-4, 1.6rem) var(--spacing-8, 3.2rem);
     height: 5.6rem;
     margin-bottom: var(--spacing-8);
+    @include text-preset-3();
 
     & svg {
       height: 2.4rem;

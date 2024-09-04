@@ -1,37 +1,40 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import type { Balance, Budget, Pot, Transaction } from '@/types/finance.type'
+import type { Balance } from '@/types/finance.type'
 
-export const useFinance = defineStore('finance', () => {
+export const useBalanceStore = defineStore('balance', () => {
   // * States
   const balance = ref<Balance>()
-  const transactions = ref<Transaction[]>([])
-  const budgets = ref<Budget[]>([])
-  const pots = ref<Pot[]>([])
-
   const loading = ref(false)
   const error = ref<Error | null>(null)
 
   // * Getters
   // *    transactions
-  const getTransactionById = (id: string) => transactions.value.find(t => t.id === id)
-
-  // *    Budgets
-  const getBudgetById = (id: string) => budgets.value.find(b => b.id === id)
-
-  // *    Pots
-  const getPotById = (id: string) => pots.value.find(p => p.id === id)
 
   //  * Actions
-  // *    balance
-  // *
-  // *    transactions
-  // *    transactions
-
+  // *    fetchBalance
+  const fetchBalance = async () => {
+    loading.value = true
+    error.value = null
+    try {
+      const res = await fetch('http://localhost:3000/balance')
+      if (!res.ok) {
+        throw new Error('Error fetching balance')
+      }
+      balance.value = await res.json()
+    } catch (e) {
+      console.log({ e })
+      error.value = e as Error
+    } finally {
+      loading.value = false
+    }
+  }
 
   return {
-    balance, transactions, budgets, pots,
-    getTransactionById, getBudgetById, getPotById
+    balance,
+    loading,
+    error,
+    fetchBalance
 
   }
 })

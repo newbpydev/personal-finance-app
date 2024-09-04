@@ -66,6 +66,14 @@ body {
 
 .container {
   width: 100%;
+  display: flex;
+  flex: 1 0 0;
+  overflow-y: scroll;
+
+  & h1 {
+    @include text-preset-1();
+    @include responsive(padding, null, var(--spacing-2) 0)
+  }
 
   @include responsive(padding,
           var(--spacing-6, 2.4rem) var(--spacing-4, 1.6rem),
