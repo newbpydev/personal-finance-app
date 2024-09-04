@@ -44,21 +44,32 @@ onMounted(() => {
     </div>
     <div v-else>Loading Balance</div>
 
-    <div class="overview-pots">
-      <card-wrapper :is-dark="false" :is-stat="false" gap="sm" title="Pots">
-        <span>Total: {{ potsStore.getTotalSaved }}</span>
-      </card-wrapper>
-    </div>
+    <div class="overview-wrapper">
+      <div class="col-1">
+        <div class="overview-pots">
+          <card-wrapper :is-dark="false" :is-stat="false" gap="sm" title="Pots">
+            <span>Total: {{ potsStore.getTotalSaved }}</span>
+          </card-wrapper>
+        </div>
 
-    <div class="overview-transactions">
-      <card-wrapper gap="md" title="Transactions">
+        <div class="overview-transactions">
+          <card-wrapper gap="md" title="Transactions">
 
-        <OverviewTransactionList :transactions="lastFiveTransactions" />
-      </card-wrapper>
-    </div>
+            <OverviewTransactionList :transactions="lastFiveTransactions" />
+          </card-wrapper>
+        </div>
+      </div>
 
-    <div class="overview-Budgets">
-      <card-wrapper gap="sm" title="Budgets"></card-wrapper>
+
+      <div class="col-2">
+        <div class="overview-budgets">
+          <card-wrapper gap="sm" title="Budgets"></card-wrapper>
+        </div>
+
+        <div class="overview-recurring">
+          <card-wrapper gap="sm" title="Recurring Bills"></card-wrapper>
+        </div>
+      </div>
     </div>
   </main>
 </template>
@@ -80,6 +91,27 @@ onMounted(() => {
 
     & {
       @include u.responsive(gap, var(--spacing-3), var(--spacing-6));
+    }
+  }
+
+  &-wrapper {
+    display: flex;
+    gap: var(--spacing-6);
+    @include u.responsive(flex-direction, column, null, row);
+
+    & .col-1 {
+      display: flex;
+      flex-direction: column;
+      //width: 60.8rem;
+      @include u.responsive(width, 100%, null, 60.8rem);
+      @include u.responsive(gap, var(--spacing-4), var(--spacing-6));
+    }
+
+    & .col-2 {
+      display: flex;
+      flex-direction: column;
+      flex: 1 0 0;
+      @include u.responsive(gap, var(--spacing-4), var(--spacing-6));
     }
   }
 }
