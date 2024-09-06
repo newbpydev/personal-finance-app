@@ -12,6 +12,8 @@ export const useTransactionStore = defineStore('transactions', () => {
   // *    transactions
   const getTransactionById = (id: string) => transactions.value.find(t => t.id === id)
 
+  const getTransactionsByCategory = (category: string) => transactions.value.filter(t => t.category === category)
+
   //  * Actions
   // *    fetchTransactions
   const fetchTransactions = async () => {
