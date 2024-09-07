@@ -27,9 +27,9 @@ onMounted(() => {
     <card-wrapper gap="sm" link-title="See Details" title="Budgets" to="/budgets">
         <div class="info">
             <div v-if="!budgetsStore.loading" class="col-1">
-                <BudgetGraph :budgets="budgets" :current-spent="currentSpent" :total-limit="totalLimit" />
+                <BudgetGraph />
             </div>
-            
+
             <div class="col-2">
                 <StatHighlight v-for="budget of budgetsStore.budgets.slice(0, 4)" :key="budget.id"
                                :tag-color="budget.theme"

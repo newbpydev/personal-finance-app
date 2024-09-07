@@ -1,71 +1,48 @@
 <script lang="ts" setup>
 import { computed, onMounted } from 'vue'
+import { useBudgetsStore } from '@/stores/budgets'
+import { formatCurrency } from '@/utils/currency'
 
-interface Budget {
-    theme: string;
-    category: string;
-    value: number;
-}
 
-// defineProps<{
-//     budgets: Budget[],
-//     totalLimit: number,
-//     currentSpent: number
-// }>()
+const budgetsStore = useBudgetsStore()
 
-const budgets = [
-    { theme: '#FF6384', category: 'Food', value: 150 },
-    { theme: '#36A2EB', category: 'Transport', value: 100 },
-    { theme: '#FFCE56', category: 'Entertainment', value: 50 }
-]
-const totalLimit = 975
-const currentSpent = 300
+const currentSpent = budgetsStore.getBudgetSpent
 
-const totalValue = computed(() => budgets.reduce((sum, budget) => sum + budget.value), 0)
-
-const segments = computed(() => {
-    let cumulativeValue = 0
-    return budgets.map(budget => {
-        const valuePercentage = (budget.value / totalValue.value) * 100
-        console.log(valuePercentage)
-        const dasharray = `${valuePercentage} ${100 - valuePercentage}`
-        const offset = cumulativeValue
-        cumulativeValue += valuePercentage
-        return {
-            color: budget.theme,
-            dasharray,
-            offset: /*css*/`calc(${100 - offset} * 31.4 / 100)`
-        }
-    })
-})
+const totalValue = budgetsStore.getMaxBudgetLimit
 
 const slices = computed(() => {
     let startAngle = 0
-    return budgets.map(budget => {
+    return budgetsStore.budgets.map((budget, i, arr) => {
         const start = startAngle
-        const value = (budget.value / currentSpent) * 360 // convert percentage to degrees
+        const value = (budget.maximum / totalValue) * 360 // convert percentage to degrees
         startAngle += value
         return {
             ...budget,
-            startAngle: start
+            startAngle: start,
+            endAngle: arr.length - 1 !== i ? startAngle : 360
         }
     })
 })
 
 console.log(slices.value)
 
+const conicGradient = computed(() => {
+    const degreeString = slices.value.reduce((acc, slice) => acc + `${slice.theme} ${slice.startAngle}deg, ${slice.theme} ${slice.endAngle}deg, `, '').slice(0, -2)
+    return `conic-gradient(${degreeString.trimEnd()})`
+})
+
 onMounted(() => {
 })
 </script>
 
 <template>
-    <div :style="{backgroundImage: 'conic-gradient(red 0deg, red 90deg, yellow 90deg, yellow 180deg)'}"
+    <div :style="{backgroundImage: conicGradient}"
          class="pie-graph">
         <div class="pie-graph__halo">
             <div class="pie-graph__text-container">
                 <div class="pie-graph__text-content">
-                    <span class="spent">$338</span>
-                    <span class="limit">of $900 limit</span>
+                    <span class="spent">{{ formatCurrency(currentSpent) }}</span>
+                    <span class="limit">of {{ formatCurrency(budgetsStore.getMaxBudgetLimit) }} limit</span>
                 </div>
             </div>
         </div>

@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 import type { Budget } from '@/types/finance.type'
+import { useTransactionStore } from '@/stores/transactions'
 
 export const useBudgetsStore = defineStore('budgets', () => {
   const budgets = ref<Budget[]>([])
@@ -10,9 +11,15 @@ export const useBudgetsStore = defineStore('budgets', () => {
   const getMaxBudgetLimit = computed(() =>
     budgets.value.reduce((acc, budget) => acc + budget.maximum, 0)
   )
-  const getBudgetSpent = computed(() =>
-    // budgets.value.reduce((acc, budget) => acc + 1, 0)
-    338
+  const getBudgetSpent = computed(() => {
+      const transactionsStore = useTransactionStore()
+      const data = budgets.value.reduce((acc, budget) => [...acc, budget.category], [])
+      let spentSum = 0
+      for (const budgetString of data) {
+        spentSum += transactionsStore.getTransactionsByCategory(budgetString).reduce((acc, transaction) => acc + transaction.amount, 0)
+      }
+      return Math.abs(spentSum)
+    }
   )
 
   const fetchBudgets = async () => {

@@ -39,7 +39,7 @@ export const useTransactionStore = defineStore('transactions', () => {
     transactions,
     loading,
     error,
-    getTransactionById,
+    getTransactionById, getTransactionsByCategory,
     fetchTransactions
 
   }
