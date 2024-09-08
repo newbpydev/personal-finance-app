@@ -24,8 +24,6 @@ const slices = computed(() => {
     })
 })
 
-console.log(slices.value)
-
 const conicGradient = computed(() => {
     const degreeString = slices.value.reduce((acc, slice) => acc + `${slice.theme} ${slice.startAngle}deg, ${slice.theme} ${slice.endAngle}deg, `, '').slice(0, -2)
     return `conic-gradient(${degreeString.trimEnd()})`

@@ -1,11 +1,20 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 
+import { useRecurringBillsStore } from '@/stores/recurring-bills'
+import { onMounted } from 'vue'
+
+const recurringBillsStore = useRecurringBillsStore()
+
+onMounted(() => {
+})
 </script>
 
 <template>
-  $END$
+    <div v-for="bill in recurringBillsStore.recurringBills" :key="bill.id">
+        {{ bill.name }} {{ bill.amount }}
+    </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 
 </style>

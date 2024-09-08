@@ -9,13 +9,13 @@ import OverviewPots from '@/components/OverviewPots.vue'
 import OverviewTransactionList from '@/components/OverviewTransactionList.vue'
 import { useBudgetsStore } from '@/stores/budgets'
 import OverviewBudgets from '@/components/OverviewBudgets.vue'
+import OverviewRecurringBills from '@/components/OverviewRecurringBills.vue'
 
 
 const balanceStore = useBalanceStore()
 const potsStore = usePotsStore()
 const transactionsStore = useTransactionStore()
 const budgetsStore = useBudgetsStore()
-
 
 const lastFiveTransactions = computed(() => transactionsStore.transactions.slice(0, 5))
 
@@ -71,7 +71,9 @@ onMounted(() => {
 
                 <div class="overview-recurring">
                     <card-wrapper gap="sm" link-title="See Details" title="Recurring Bills"
-                                  to="/recurring-bills"></card-wrapper>
+                                  to="/recurring-bills">
+                        <OverviewRecurringBills />
+                    </card-wrapper>
                 </div>
             </div>
         </div>
