@@ -40,13 +40,13 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-@use '@/assets/styles/utils.scss' as u;
+@use '@/assets/styles/utils' as u;
 
 .info {
     display: flex;
     gap: var(--spacing-4);
-    @include u.responsive(flex-direction, column, row);
     padding: var(--spacing-2) 0;
+    @include u.responsive(flex-direction, column, row);
 
     & .col-1 {
         display: flex;

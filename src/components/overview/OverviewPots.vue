@@ -4,7 +4,7 @@ import CardWrapper from '@/components/CardWrapper.vue'
 import { usePotsStore } from '@/stores/pots'
 import PotIcon from '@/components/icons/PotIcon.vue'
 import StatHighlight from '@/components/StatHighlight.vue'
-import { formatCurrency } from '../utils/currency'
+import { formatCurrency } from '../../utils/currency'
 
 const potsStore = usePotsStore()
 
@@ -32,7 +32,7 @@ const potsStore = usePotsStore()
 </template>
 
 <style lang="scss" scoped>
-@use '@/assets/styles/utils.scss' as u;
+@use '@/assets/styles/utils' as u;
 
 .card {
     &-info {

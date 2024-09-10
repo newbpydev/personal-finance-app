@@ -5,11 +5,11 @@ import { computed, onBeforeMount, onMounted } from 'vue'
 import { formatCurrency } from '@/utils/currency'
 import { usePotsStore } from '@/stores/pots'
 import { useTransactionStore } from '@/stores/transactions'
-import OverviewPots from '@/components/OverviewPots.vue'
-import OverviewTransactionList from '@/components/OverviewTransactionList.vue'
+import OverviewPots from '@/components/overview/OverviewPots.vue'
+import OverviewTransactionList from '@/components/overview/OverviewTransactionList.vue'
 import { useBudgetsStore } from '@/stores/budgets'
-import OverviewBudgets from '@/components/OverviewBudgets.vue'
-import OverviewRecurringBills from '@/components/OverviewRecurringBills.vue'
+import OverviewBudgets from '@/components/overview/OverviewBudgets.vue'
+import OverviewRecurringBills from '@/components/overview/OverviewRecurringBills.vue'
 
 
 const balanceStore = useBalanceStore()
