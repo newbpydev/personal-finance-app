@@ -70,7 +70,7 @@ onMounted(() => {
                 <OverviewBudgets />
 
                 <div class="overview-recurring">
-                    <card-wrapper gap="sm" link-title="See Details" title="Recurring Bills"
+                    <card-wrapper gap="md" link-title="See Details" title="Recurring Bills"
                                   to="/recurring-bills">
                         <OverviewRecurringBills />
                     </card-wrapper>
