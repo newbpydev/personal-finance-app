@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { onUpdated, ref } from 'vue'
+import { onUpdated, ref, watch } from 'vue'
 import type { Transaction } from '@/types/finance.type'
 import { useRecurringBillsStore } from '@/stores/recurring-bills'
 
@@ -38,6 +38,10 @@ export const useTransactionStore = defineStore('transactions', () => {
   // *    transactions
 
   onUpdated(() => {
+    recurringBillsStore.updateRecurringBills()
+  })
+
+  watch(transactions, (newTransactions, oldTransactions) => {
     recurringBillsStore.updateRecurringBills()
   })
 

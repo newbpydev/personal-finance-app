@@ -4,7 +4,7 @@ import AuthView from '@/views/AuthView.vue'
 import TransactionsView from '@/views/TransactionsView.vue'
 import BudgetsView from '@/views/BudgetsView.vue'
 import PotsView from '@/views/PotsView.vue'
-import RecurringBills from '@/views/RecurringBills.vue'
+import RecurringBills from '@/views/RecurringBillsView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

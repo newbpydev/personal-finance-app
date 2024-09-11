@@ -31,6 +31,7 @@ import SearchIcon from '@/assets/images/icon-search.svg'
     transition: all .2s;
     width: 100%;
     max-width: 32rem;
+    cursor: pointer;
 
     &:hover {
         color: var(--c-grey-900);

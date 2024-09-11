@@ -11,7 +11,7 @@ defineProps<{
     type: 'sort' | 'filter'
 }>()
 
-const isOpened = ref(true)
+const isOpened = ref(false)
 const dropdownContainer = ref<HTMLElement | null>(null)
 
 const handleClick = (value?: string) => {
@@ -47,18 +47,30 @@ onBeforeUnmount(() => {
         <SortByIcon v-if="type === 'sort'" class="mobile-icon" @click="() => isOpened = !isOpened" />
         <FilterIcon v-if="type === 'filter'" class="mobile-icon" @click="() => isOpened = !isOpened" />
 
-        <ul v-show="isOpened" class="option-list">
-            <li class="list-item text">{{ label }}</li>
-            <li v-for="option in options" :key="option" :class="{'list-item': true, 'active': model === option }"
-                @click="handleClick(option)">
-                {{ option }}
-            </li>
-        </ul>
+        <Transition name="fade">
+            <ul v-show="isOpened" class="option-list">
+                <li class="list-item text">{{ label }}</li>
+                <li v-for="option in options" :key="option" :class="{'list-item': true, 'active': model === option }"
+                    @click="handleClick(option)">
+                    {{ option }}
+                </li>
+            </ul>
+        </Transition>
     </div>
 </template>
 
 <style lang="scss" scoped>
 @use "@/assets/styles/utils" as u;
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity .2s;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
 
 .select-field {
     flex-direction: column;

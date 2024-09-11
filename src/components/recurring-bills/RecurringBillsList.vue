@@ -1,8 +1,9 @@
 <script lang="ts" setup>
 
 import FieldInput from '@/components/inputs/FieldInput.vue'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import SelectField from '@/components/inputs/SelectField.vue'
+import { useRecurringBillsStore } from '@/stores/recurring-bills'
 
 const searchInput = ref('')
 const sortBy = ref('Latest')
@@ -13,6 +14,12 @@ const sortOptions = [
     'Highest',
     'Lowest'
 ]
+
+const recurringBillsStore = useRecurringBillsStore()
+
+onMounted(() => {
+    // recurringBillsStore.updateRecurringBills()
+})
 
 </script>
 

@@ -12,7 +12,7 @@ const recurringBillsStore = useRecurringBillsStore()
 
 onMounted(() => {
     transactionsStore.fetchTransactions()
-    recurringBillsStore.updateRecurringBills()
+    // recurringBillsStore.updateRecurringBills()
 })
 </script>
 
