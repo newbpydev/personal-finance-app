@@ -47,6 +47,11 @@
     background: var(--c-white);
     border-radius: var(--spacing-3);
     padding: 2rem;
+    margin-bottom: 2.4rem;
+
+    @media (min-width: 37.5rem) {
+        margin-bottom: 0;
+    }
 
     & .title {
         @include u.text-preset-3();

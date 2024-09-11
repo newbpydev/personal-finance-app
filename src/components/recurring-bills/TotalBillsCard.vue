@@ -25,7 +25,11 @@ import RecurringBillsIcon from '@/components/icons/RecurringBillsIcon.vue'
     @include u.responsive(padding, 2.4rem 2rem, 2.4rem);
     @include u.responsive(flex-direction, row, column);
     @include u.responsive(align-items, center, start);
+    margin-bottom: 1.2rem;
 
+    @media (min-width: 37.5rem) {
+        margin-bottom: 0;
+    }
 
     &-icon {
         height: 4rem;
