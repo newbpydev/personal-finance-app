@@ -21,9 +21,6 @@ import SearchIcon from '@/assets/images/icon-search.svg'
 
 <style lang="scss" scoped>
 .input-field {
-}
-
-.input-field {
     display: flex;
     align-items: center;
     gap: var(--spacing-4);
@@ -32,6 +29,8 @@ import SearchIcon from '@/assets/images/icon-search.svg'
     border-radius: var(--spacing-2);
     border: 1px solid var(--c-beige-500);
     transition: all .2s;
+    width: 100%;
+    max-width: 32rem;
 
     &:hover {
         color: var(--c-grey-900);
