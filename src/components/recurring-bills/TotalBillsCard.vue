@@ -21,11 +21,11 @@ import RecurringBillsIcon from '@/components/icons/RecurringBillsIcon.vue'
     background: var(--c-grey-900);
     color: var(--c-white);
     border-radius: var(--spacing-3);
+    margin-bottom: 1.2rem;
     @include u.responsive(gap, var(--spacing-5), var(--spacing-8));
     @include u.responsive(padding, 2.4rem 2rem, 2.4rem);
     @include u.responsive(flex-direction, row, column);
     @include u.responsive(align-items, center, start);
-    margin-bottom: 1.2rem;
 
     @media (min-width: 37.5rem) {
         margin-bottom: 0;
