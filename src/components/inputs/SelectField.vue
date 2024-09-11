@@ -2,7 +2,7 @@
 import CaretDown from '@/assets/images/icon-caret-down.svg'
 import SortByIcon from '@/assets/images/icon-sort-mobile.svg'
 import FilterIcon from '@/assets/images/icon-filter-mobile.svg'
-import { ref } from 'vue'
+import { onBeforeUnmount, onMounted, ref } from 'vue'
 
 const model = defineModel('value', { type: String })
 defineProps<{
@@ -12,17 +12,31 @@ defineProps<{
 }>()
 
 const isOpened = ref(true)
+const dropdownContainer = ref<HTMLElement | null>(null)
 
 const handleClick = (value?: string) => {
     if (value)
         model.value = value
     isOpened.value = !isOpened.value
-
 }
+
+const handleClickOutside = (event: MouseEvent) => {
+    if (dropdownContainer.value && !dropdownContainer.value.contains(event.target as Node)) {
+        isOpened.value = false
+    }
+}
+
+onMounted(() => {
+    document.addEventListener('click', handleClickOutside)
+})
+
+onBeforeUnmount(() => {
+    document.removeEventListener('click', handleClickOutside)
+})
 </script>
 
 <template>
-    <div class="select-field">
+    <div ref="dropdownContainer" class="select-field">
         <div class="select-label" @click="() => isOpened = !isOpened">
             <span class="text">{{ label }}</span>
             <div class="select">
@@ -34,6 +48,7 @@ const handleClick = (value?: string) => {
         <FilterIcon v-if="type === 'filter'" class="mobile-icon" @click="() => isOpened = !isOpened" />
 
         <ul v-show="isOpened" class="option-list">
+            <li class="list-item text">{{ label }}</li>
             <li v-for="option in options" :key="option" :class="{'list-item': true, 'active': model === option }"
                 @click="handleClick(option)">
                 {{ option }}
@@ -50,11 +65,12 @@ const handleClick = (value?: string) => {
     width: fit-content;
     position: relative;
 
-    & .text {
-        @include u.text-preset-4();
-        color: var(--c-grey-500);
-    }
 
+}
+
+.text {
+    @include u.text-preset-4();
+    color: var(--c-grey-500);
 }
 
 .select-label {
@@ -122,10 +138,30 @@ const handleClick = (value?: string) => {
     @include u.responsive(top, 4.8rem, 6rem);
 
     & .list-item {
+        border-bottom: 1px solid var(--c-grey-100);
+        padding: 1.2rem 0;
+
+        &.text {
+            cursor: default;
+            @include u.responsive(display, block, none);
+
+        }
+
+        &:last-of-type {
+            padding: 1.2rem 0 0 0;
+            border-bottom: none;
+        }
 
         &.active {
             @include u.text-preset-4-bold();
         }
+
+        //&::after {
+        //    content: '';
+        //    height: .1rem;
+        //    width: 100%;
+        //    background: var(--c-grey-100);
+        //}
     }
 }
 
