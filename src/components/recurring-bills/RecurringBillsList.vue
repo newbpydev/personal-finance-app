@@ -81,10 +81,10 @@ onMounted(() => {
     color: var(--c-grey-500);
     padding: var(--spacing-3) 0;
     border-bottom: 1px solid var(--c-grey-100);
+    @include u.text-preset-5();
     @media (min-width: v.$mobile-lg-width) {
         display: flex;
     }
-    @include u.text-preset-5();
 
     & .title {
         flex: 1 0 0;

@@ -30,6 +30,8 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
+@use '@/assets/styles/variables' as v;
+
 .recurring-bills {
     & h1 {
         margin-bottom: var(--spacing-8);
@@ -42,12 +44,19 @@ onMounted(() => {
         "summary"
         "bills";
 
-        @media (min-width: 37.5em) {
+        @media (min-width: v.$mobile-lg-width) {
             grid-template-columns: repeat(2, 1fr);
             gap: var(--spacing-6);
             grid-template-areas:
               "total-bills summary"
                 "bills bills";
+        }
+
+        @media (min-width: v.$laptop-lg-width) {
+            grid-template-columns: 33.7rem minmax(55rem, auto);
+            grid-template-areas:
+            "total-bills bills"
+            "summary bills";
         }
     }
 
