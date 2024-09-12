@@ -36,6 +36,7 @@ import RecurringBillsIcon from '@/components/icons/RecurringBillsIcon.vue'
         width: 4rem;
         stroke: white;
         color: white;
+        fill: var(--c-grey-900);
     }
 
     &-info {
