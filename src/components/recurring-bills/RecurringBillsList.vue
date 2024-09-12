@@ -1,9 +1,11 @@
 <script lang="ts" setup>
 
 import FieldInput from '@/components/inputs/FieldInput.vue'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import SelectField from '@/components/inputs/SelectField.vue'
 import { useRecurringBillsStore } from '@/stores/recurring-bills'
+import { getDay } from '@/utils/dates'
+import { formatCurrency } from '@/utils/currency'
 
 const searchInput = ref('')
 const sortBy = ref('Latest')
@@ -16,6 +18,10 @@ const sortOptions = [
 ]
 
 const recurringBillsStore = useRecurringBillsStore()
+
+watch(sortBy, () => {
+    // recurringBillsStore.sortRecurringBills(sortBy.value)
+})
 
 onMounted(() => {
     // recurringBillsStore.updateRecurringBills()
@@ -38,7 +44,8 @@ onMounted(() => {
 
         <div class="bills-table">
             <ul class="bills-list">
-                <li v-for="bill in recurringBillsStore.recurringBills" :key="bill.id" class="list-item">
+                <li v-for="bill in recurringBillsStore.getSortedRecurringBills(sortBy)" :key="bill.id"
+                    class="list-item">
                     <div class="title">
                         <div class="icon">
                             <img :src="bill.avatar" alt="">
@@ -46,8 +53,8 @@ onMounted(() => {
                         <span class="text">{{ bill.name }}</span>
                     </div>
                     <div class="date-amount">
-                        <span class="date">Monthly - 1st <i class="status-icon">icon</i></span>
-                        <span class="amount">$250.00</span>
+                        <span class="date">Monthly - {{ getDay(bill.date) }} <i class="status-icon">icon</i></span>
+                        <span class="amount">{{ formatCurrency(Math.abs(bill.amount)) }}</span>
                     </div>
                 </li>
             </ul>

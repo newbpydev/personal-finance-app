@@ -111,7 +111,7 @@
       "category": "Transportation",
       "date": "2024-08-08T08:55:17Z",
       "amount": -15.00,
-      "recurring": false
+      "recurring": true
     },
     {
       "id": "o2n1m0p9-q8r7-s6t5-u4v3-w2x1y0z9a8b7",
