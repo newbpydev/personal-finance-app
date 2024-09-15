@@ -23,6 +23,4 @@ export const getDay = (dateString: string, locale: string = 'en-UK') => {
     default:
       return `${res}th`
   }
-
-  // return new Intl.DateTimeFormat(locale, options).format(date)
 }

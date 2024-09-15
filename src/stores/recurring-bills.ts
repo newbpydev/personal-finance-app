@@ -14,8 +14,8 @@ export const useRecurringBillsStore = defineStore('recurring-bills', () => {
   }
 
   const getSortedRecurringBills = (sortBy: Sort) => {
-    if (recurringBills.value.length)
-      console.log(new Date(recurringBills.value[0].date).getTime())
+    // if (recurringBills.value.length)
+    //   console.log(new Date(recurringBills.value[0].date).getTime())
     switch (sortBy) {
       case 'Oldest':
         return [...recurringBills.value].sort((a: Transaction, b: Transaction) => {
