@@ -5,11 +5,6 @@ import type { RecurringTransaction, Transaction } from '@/types/finance.type'
 import type { Sort } from '@/types/category.type'
 
 
-const isPaid = (bill: Transaction) => {
-  console.log(currentBillsPaid.value)
-  return currentBillsPaid.value.some(t => t.name === bill.name)
-}
-
 const getDayOfMonth = (date: Date) => date.getDate()
 
 export const useRecurringBillsStore = defineStore('recurring-bills', () => {

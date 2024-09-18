@@ -39,6 +39,7 @@
 
 <style lang="scss" scoped>
 @use "@/assets/styles/utils" as u;
+@use "@/assets/styles/variables" as v;
 
 .summary-card {
     display: flex;
@@ -51,6 +52,12 @@
 
     @media (min-width: 37.5rem) {
         margin-bottom: 0;
+    }
+
+    @media (min-width: v.$laptop-lg-width) {
+        height: min-content;
+
+        //align-self: flex-start;
     }
 
     & .title {

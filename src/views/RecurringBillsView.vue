@@ -60,6 +60,7 @@ onMounted(() => {
 
         @media (min-width: v.$laptop-lg-width) {
             grid-template-columns: 33.7rem minmax(55rem, auto);
+            grid-template-rows: 19rem auto;
             grid-template-areas:
             "total-bills bills"
             "summary bills";

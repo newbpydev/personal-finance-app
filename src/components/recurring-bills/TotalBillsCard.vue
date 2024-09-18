@@ -15,6 +15,7 @@ import RecurringBillsIcon from '@/components/icons/RecurringBillsIcon.vue'
 
 <style lang="scss" scoped>
 @use "@/assets/styles/utils" as u;
+@use "@/assets/styles/variables" as v;
 
 .card {
     display: flex;
