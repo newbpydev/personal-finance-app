@@ -10,6 +10,12 @@ import { useRecurringBillsStore } from '@/stores/recurring-bills'
 const transactionsStore = useTransactionStore()
 const recurringBillsStore = useRecurringBillsStore()
 
+// const currentPaidBills = computed(() => {
+//     return transactionsStore.getTransactionsByDate(5, 2024)
+// })
+//
+// console.log(currentPaidBills.value)
+
 onMounted(() => {
     transactionsStore.fetchTransactions()
     // recurringBillsStore.updateRecurringBills()

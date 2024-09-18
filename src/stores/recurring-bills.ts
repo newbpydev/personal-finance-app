@@ -1,8 +1,16 @@
 import { defineStore } from 'pinia'
-import { onUpdated, ref } from 'vue'
+import { computed, onUpdated, ref } from 'vue'
 import { useTransactionStore } from '@/stores/transactions'
 import type { Transaction } from '@/types/finance.type'
-import type { Sort } from '@/types/category.types'
+import type { Sort } from '@/types/category.type'
+
+
+const isPaid = (bill: Transaction) => {
+  console.log(currentBillsPaid.value)
+  return currentBillsPaid.value.some(t => t.name === bill.name)
+}
+
+const getDayOfMonth = (date: Date) => date.getDate()
 
 export const useRecurringBillsStore = defineStore('recurring-bills', () => {
   const transactionsStore = useTransactionStore()
@@ -13,26 +21,40 @@ export const useRecurringBillsStore = defineStore('recurring-bills', () => {
     recurringBills.value = transactionsStore.transactions.filter(t => t.recurring)
   }
 
+  const currentPaidBills = computed(() => {
+    return transactionsStore.getTransactionsByDate(7, 2024)
+  })
+
   const getSortedRecurringBills = (sortBy: Sort) => {
-    // if (recurringBills.value.length)
-    //   console.log(new Date(recurringBills.value[0].date).getTime())
+    const recurringBillsList = recurringBills.value.map(t => {
+      const curDate = new Date()
+      const isPaid = currentPaidBills.value.some(bill => bill.name === t.name)
+      const bill = currentPaidBills.value.find(b => b.name === t.name)
+      const todayDay = getDayOfMonth(curDate)
+      const billDay = getDayOfMonth(new Date(bill?.date))
+      const isDue = isNaN(billDay) ? true : todayDay >= billDay
+      return { ...t, isPaid, isDue }
+    })
+
     switch (sortBy) {
       case 'Oldest':
-        return [...recurringBills.value].sort((a: Transaction, b: Transaction) => {
+        return [...recurringBillsList].sort((a: Transaction, b: Transaction) => {
           return new Date(b.date).getTime() - new Date(a.date).getTime()
         })
       case 'A to Z':
-        return [...recurringBills.value].sort((a: Transaction, b: Transaction) => a.name.localeCompare(b.name))
+        return [...recurringBillsList].sort((a: Transaction, b: Transaction) => a.name.localeCompare(b.name))
       case 'Highest':
-        return [...recurringBills.value].sort((a, b) => a.amount - b.amount)
+        return [...recurringBillsList].sort((a, b) => a.amount - b.amount)
       case 'Lowest':
-        return [...recurringBills.value].sort((a, b) => b.amount - a.amount)
+        return [...recurringBillsList].sort((a, b) => b.amount - a.amount)
       default:
-        return [...recurringBills.value].sort((a: Transaction, b: Transaction) => {
+        return [...recurringBillsList].sort((a: Transaction, b: Transaction) => {
           return new Date(a.date).getTime() - new Date(b.date).getTime()
         })
     }
   }
+
+  // const getCurrent
 
   onUpdated(() => {
     console.log(recurringBills.value)

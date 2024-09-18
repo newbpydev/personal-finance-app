@@ -1,11 +1,13 @@
 <script lang="ts" setup>
 
 import FieldInput from '@/components/inputs/FieldInput.vue'
-import { onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import SelectField from '@/components/inputs/SelectField.vue'
 import { useRecurringBillsStore } from '@/stores/recurring-bills'
 import { getDay } from '@/utils/dates'
 import { formatCurrency } from '@/utils/currency'
+import { useTransactionStore } from '@/stores/transactions'
+import type { Transaction } from '@/types/finance.type'
 
 const searchInput = ref('')
 const sortBy = ref('Latest')
@@ -18,10 +20,27 @@ const sortOptions = [
 ]
 
 const recurringBillsStore = useRecurringBillsStore()
-
-watch(sortBy, () => {
-    // recurringBillsStore.sortRecurringBills(sortBy.value)
+const transactionsStore = useTransactionStore()
+const currentBillsPaid = computed(() => {
+    return transactionsStore.getTransactionsByDate(5, 2024)
 })
+
+const isPaid = (bill: Transaction) => {
+    console.log(currentBillsPaid.value)
+    return currentBillsPaid.value.some(t => t.name === bill.name)
+}
+
+const isPastDue = (bill: Transaction) => {
+    const bDate = new Date(bill.date)
+    return currentBillsPaid.value.some(t => {
+        const tDate = new Date(t.date)
+        return tDate
+    })
+}
+
+// watch(sortBy, () => {
+//     // recurringBillsStore.sortRecurringBills(sortBy.value)
+// })
 
 onMounted(() => {
     // recurringBillsStore.updateRecurringBills()
@@ -53,7 +72,9 @@ onMounted(() => {
                         <span class="text">{{ bill.name }}</span>
                     </div>
                     <div class="date-amount">
-                        <span class="date">Monthly - {{ getDay(bill.date) }} <i class="status-icon">icon</i></span>
+                        <span class="date">Monthly - {{ getDay(bill.date) }} <i class="status-icon">
+                            {{ isPaid(bill) ? 'paid' : 'not paid' }}
+                        </i></span>
                         <span class="amount">{{ formatCurrency(Math.abs(bill.amount)) }}</span>
                     </div>
                 </li>

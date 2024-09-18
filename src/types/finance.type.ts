@@ -32,7 +32,12 @@ export interface Transaction {
   avatar: string;
   name: string;
   category: string;
-  date: Date;
+  date: string;
   amount: number;
   recurring: boolean;
+}
+
+export interface RecurringTransaction extends Transaction {
+  isPaid: boolean;
+  isDue: boolean;
 }

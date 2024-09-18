@@ -30,7 +30,7 @@
       "category": "General",
       "date": "2024-08-18T09:45:32Z",
       "amount": -42.30,
-      "recurring": false
+      "recurring": true
     },
     {
       "id": "m7n8b9v0-c1x2-z3w4-y5v6-u7t8r9q0p1o2",
@@ -183,7 +183,7 @@
       "category": "Transportation",
       "date": "2024-07-02T19:50:05Z",
       "amount": -16.50,
-      "recurring": false
+      "recurring": true
     }
   ],
   "budgets": [

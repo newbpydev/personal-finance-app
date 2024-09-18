@@ -17,6 +17,15 @@ export const useTransactionStore = defineStore('transactions', () => {
 
   const getTransactionsByCategory = (category: string) => transactions.value.filter(t => t.category === category)
 
+  const getTransactionsByDate = (month: number, year: number) => {
+    return transactions.value.filter(t => {
+      const tDate = new Date(t.date)
+      // console.log(tDate.getMonth(), tDate.getFullYear())
+      return tDate.getMonth() === month && tDate.getFullYear() === year
+    })
+
+  }
+
   //  * Actions
   // *    fetchTransactions
   const fetchTransactions = async () => {
@@ -50,7 +59,7 @@ export const useTransactionStore = defineStore('transactions', () => {
     transactions,
     loading,
     error,
-    getTransactionById, getTransactionsByCategory,
+    getTransactionById, getTransactionsByCategory, getTransactionsByDate,
     fetchTransactions
 
   }
