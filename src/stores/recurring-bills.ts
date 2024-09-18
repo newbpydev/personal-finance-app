@@ -11,6 +11,7 @@ export const useRecurringBillsStore = defineStore('recurring-bills', () => {
   const transactionsStore = useTransactionStore()
 
   const recurringBills = ref<Transaction[]>([])
+  const totalBills = ref(0)
 
   const updateRecurringBills = () => {
     recurringBills.value = transactionsStore.transactions.filter(t => t.recurring)
@@ -32,8 +33,13 @@ export const useRecurringBillsStore = defineStore('recurring-bills', () => {
       const billDay = getDayOfMonth(new Date(t.date))
       // const isDue = isNaN(billDay) ? true : todayDay >= billDay
       const isDue = todayDay >= billDay
+
+
       return { ...t, isPaid, isDue }
     })
+    
+    // updating totalBills
+    totalBills.value = Math.abs(recurringBillsList.reduce((acc, t) => acc += t.amount, 0))
 
     switch (sortBy) {
       case 'Oldest':
@@ -60,7 +66,7 @@ export const useRecurringBillsStore = defineStore('recurring-bills', () => {
   })
 
   return {
-    recurringBills,
+    recurringBills, totalBills,
     getSortedRecurringBills,
     updateRecurringBills
   }

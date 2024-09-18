@@ -31,9 +31,8 @@ const currentBillsPaid = computed(() => {
 const isPastDate = (bill: RecurringTransaction) => {
     const bDate = new Date(bill.date)
     const todayDate = new Date()
-
-    
 }
+
 
 // watch(sortBy, () => {
 //     // recurringBillsStore.sortRecurringBills(sortBy.value)

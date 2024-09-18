@@ -1,5 +1,19 @@
 <script lang="ts" setup>
 import RecurringBillsIcon from '@/components/icons/RecurringBillsIcon.vue'
+import { computed } from 'vue'
+import { useRecurringBillsStore } from '@/stores/recurring-bills'
+import { formatCurrency } from '@/utils/currency'
+
+const recurringBillsStore = useRecurringBillsStore()
+
+const totalBills = computed(() => {
+    return recurringBillsStore.recurringBills.reduce((acc, t) => acc + t.amount, 0)
+})
+
+// const totalPaid = computed(() => recurringBillsStore.recurringBills.reduce((acc, t) => {
+//     if (t)
+// }, { count: 0, amount: 0 }))
+
 </script>
 
 <template>
@@ -8,7 +22,7 @@ import RecurringBillsIcon from '@/components/icons/RecurringBillsIcon.vue'
 
         <div class="card-info">
             <span class="text">Total Bills</span>
-            <span class="value">$384.98</span>
+            <span class="value">{{ formatCurrency(recurringBillsStore.totalBills) }}</span>
         </div>
     </div>
 </template>
