@@ -184,6 +184,15 @@
       "date": "2024-07-02T19:50:05Z",
       "amount": -16.50,
       "recurring": true
+    },
+    {
+      "id": "a9b8c7d6-e5f4-g3h2-i1j0-k9l8m7n6o4p2",
+      "avatar": "./assets/images/avatars/swift-ride-share.jpg",
+      "name": "Swift Ride Share 2",
+      "category": "Transportation",
+      "date": "2024-07-25T19:50:05Z",
+      "amount": -16.50,
+      "recurring": true
     }
   ],
   "budgets": [
