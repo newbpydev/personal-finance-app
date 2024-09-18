@@ -1,4 +1,8 @@
 <script lang="ts" setup>
+import { useRecurringBillsStore } from '@/stores/recurring-bills'
+import { formatCurrency } from '../../utils/currency'
+
+const recurringBillsStore = useRecurringBillsStore()
 </script>
 
 <template>
@@ -10,8 +14,8 @@
                 <div class="group">
                     <span class="text">Paid Bills</span>
                     <p class="value">
-                        <span class="count">2</span>
-                        ($320.99)
+                        <span class="count">{{ recurringBillsStore.paidBills.count }}</span>
+                        ({{ formatCurrency(recurringBillsStore.paidBills.amount) }})
                     </p>
                 </div>
             </li>
@@ -19,8 +23,8 @@
                 <div class="group">
                     <span class="text">Total Upcoming</span>
                     <p class="value">
-                        <span class="count">6</span>
-                        ($1,230.00)
+                        <span class="count">{{ recurringBillsStore.totalUpcoming.count }}</span>
+                        ({{ formatCurrency(recurringBillsStore.totalUpcoming.amount) }})
                     </p>
                 </div>
             </li>
@@ -28,8 +32,8 @@
                 <div class="group">
                     <span class="text">Due Soon</span>
                     <p class="value">
-                        <span class="count">2</span>
-                        ($40.00)
+                        <span class="count">{{ recurringBillsStore.dueSoon.count }}</span>
+                        ({{ formatCurrency(recurringBillsStore.dueSoon.amount) }})
                     </p>
                 </div>
             </li>

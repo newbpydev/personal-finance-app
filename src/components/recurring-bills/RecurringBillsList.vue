@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 
 import FieldInput from '@/components/inputs/FieldInput.vue'
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, onUpdated, ref } from 'vue'
 import SelectField from '@/components/inputs/SelectField.vue'
 import { useRecurringBillsStore } from '@/stores/recurring-bills'
 import { getDay } from '@/utils/dates'
@@ -24,8 +24,12 @@ const sortOptions = [
 
 const recurringBillsStore = useRecurringBillsStore()
 const transactionsStore = useTransactionStore()
-const currentBillsPaid = computed(() => {
-    return transactionsStore.getTransactionsByDate(5, 2024)
+// const currentBillsPaid = computed(() => {
+//     return transactionsStore.getTransactionsByDate(5, 2024)
+// })
+
+const bills = computed(() => {
+    return recurringBillsStore.getSortedRecurringBills(sortBy)
 })
 
 const isPastDate = (bill: RecurringTransaction) => {
@@ -38,8 +42,17 @@ const isPastDate = (bill: RecurringTransaction) => {
 //     // recurringBillsStore.sortRecurringBills(sortBy.value)
 // })
 
+console.log(bills.value)
+
 onMounted(() => {
     // recurringBillsStore.updateRecurringBills()
+    console.log(bills.value)
+})
+
+onUpdated(() => {
+    recurringBillsStore.updateSummary(bills.value)
+
+
 })
 
 </script>
@@ -59,7 +72,7 @@ onMounted(() => {
 
         <div class="bills-table">
             <ul class="bills-list">
-                <li v-for="bill in recurringBillsStore.getSortedRecurringBills(sortBy)" :key="bill.id"
+                <li v-for="bill in bills" :key="bill.id"
                     class="list-item">
                     <div class="title">
                         <div class="icon">

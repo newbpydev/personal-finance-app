@@ -13,6 +13,10 @@ export const useRecurringBillsStore = defineStore('recurring-bills', () => {
   const recurringBills = ref<Transaction[]>([])
   const totalBills = ref(0)
 
+  const paidBills = ref<{ count: number, amount: number }>({ count: 0, amount: 0 })
+  const totalUpcoming = ref<{ count: number, amount: number }>({ count: 0, amount: 0 })
+  const dueSoon = ref<{ count: number, amount: number }>({ count: 0, amount: 0 })
+
   const updateRecurringBills = () => {
     recurringBills.value = transactionsStore.transactions.filter(t => t.recurring)
   }
@@ -22,7 +26,7 @@ export const useRecurringBillsStore = defineStore('recurring-bills', () => {
   })
 
   const getSortedRecurringBills: RecurringTransaction[] = (sortBy: Sort) => {
-    const recurringBillsList = recurringBills.value.map(t => {
+    const recurringBillsList: RecurringTransaction[] = recurringBills.value.map(t => {
       const curDate = new Date()
       const isPaid = currentPaidBills.value.some(bill => bill.name === t.name)
 
@@ -37,9 +41,16 @@ export const useRecurringBillsStore = defineStore('recurring-bills', () => {
 
       return { ...t, isPaid, isDue }
     })
-    
+
     // updating totalBills
-    totalBills.value = Math.abs(recurringBillsList.reduce((acc, t) => acc += t.amount, 0))
+    // totalBills.value = Math.abs(recurringBillsList.reduce((acc, t) => acc += t.amount, 0))
+    // recurringBillsList.forEach(t => {
+    //   if (t.isPaid) {
+    //     console.log(t.amount)
+    //     paidBills.value.count += 1
+    //     paidBills.value.amount += Math.abs(t.amount)
+    //   }
+    // })
 
     switch (sortBy) {
       case 'Oldest':
@@ -59,15 +70,40 @@ export const useRecurringBillsStore = defineStore('recurring-bills', () => {
     }
   }
 
+  const updateSummary = (bills: RecurringTransaction[]) => {
+    bills.forEach(t => {
+      // console.log(t)
+      if (t.isPaid) {
+        paidBills.value.count++
+        paidBills.value.amount += Math.abs(t.amount)
+      } else if (!t.isPaid && !t.isDue) {
+        totalUpcoming.value.count++
+        totalUpcoming.value.amount += Math.abs(t.amount)
+      } else if (t.isDue) {
+        dueSoon.value.count++
+        dueSoon.value.amount += Math.abs(t.amount)
+      }
+    })
+  }
+
   // const getCurrent
 
   onUpdated(() => {
     console.log(recurringBills.value)
+    bills.forEach(t => {
+      console.log(t)
+      if (t.isPaid) {
+        console.log('in it')
+        paidBills.value.count++
+        paidBills.value.amount += Math.abs(t.amount)
+      }
+    })
   })
 
+
   return {
-    recurringBills, totalBills,
+    recurringBills, totalBills, paidBills, totalUpcoming, dueSoon,
     getSortedRecurringBills,
-    updateRecurringBills
+    updateRecurringBills, updateSummary
   }
 })
