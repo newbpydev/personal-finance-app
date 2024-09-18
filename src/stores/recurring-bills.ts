@@ -72,7 +72,7 @@ export const useRecurringBillsStore = defineStore('recurring-bills', () => {
 
   const updateSummary = (bills: RecurringTransaction[]) => {
     bills.forEach(t => {
-      // console.log(t)
+      totalBills.value += Math.abs(t.amount)
       if (t.isPaid) {
         paidBills.value.count++
         paidBills.value.amount += Math.abs(t.amount)
