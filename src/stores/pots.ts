@@ -32,6 +32,5 @@ export const usePotsStore = defineStore('pots', () => {
     }
   }
 
-
   return { pots, loading, error, getTotalSaved, fetchPots }
 })
