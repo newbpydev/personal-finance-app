@@ -11,6 +11,13 @@ import TheButton from '@/components/buttons/TheButton.vue'
                 + Add New Budget
             </TheButton>
         </header>
+
+        <div class="cards">
+            <div class="card">card 1</div>
+            <div class="card">card 2</div>
+            <div class="card">card 3</div>
+            <div class="card">card 4</div>
+        </div>
     </main>
 </template>
 
@@ -21,9 +28,15 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    //height: 4rem;
+    margin-bottom: var(--spacing-8);
 
+}
 
+.cards {
+    display: grid;
+    //grid-template-columns: 1fr;
+    gap: var(--spacing-6);
+    @include u.responsive(grid-template-columns, 1fr, null, 1fr 1fr);
 }
 
 </style>
