@@ -5,20 +5,11 @@ import SummaryCard from '@/components/recurring-bills/SummaryCard.vue'
 import RecurringBillsList from '@/components/recurring-bills/RecurringBillsList.vue'
 import { useTransactionStore } from '@/stores/transactions'
 import { onMounted } from 'vue'
-import { useRecurringBillsStore } from '@/stores/recurring-bills'
 
 const transactionsStore = useTransactionStore()
-const recurringBillsStore = useRecurringBillsStore()
-
-// const currentPaidBills = computed(() => {
-//     return transactionsStore.getTransactionsByDate(5, 2024)
-// })
-//
-// console.log(currentPaidBills.value)
 
 onMounted(() => {
     transactionsStore.fetchTransactions()
-    // recurringBillsStore.updateRecurringBills()
 })
 </script>
 
