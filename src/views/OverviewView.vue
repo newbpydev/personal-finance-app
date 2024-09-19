@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import CardWrapper from '@/components/CardWrapper.vue'
 import { useBalanceStore } from '@/stores/balance'
-import { computed, onBeforeMount, onMounted } from 'vue'
+import { computed, onBeforeMount } from 'vue'
 import { formatCurrency } from '@/utils/currency'
 import { usePotsStore } from '@/stores/pots'
 import { useTransactionStore } from '@/stores/transactions'
@@ -24,10 +24,6 @@ onBeforeMount(() => {
     potsStore.fetchPots()
     transactionsStore.fetchTransactions()
     budgetsStore.fetchBudgets()
-})
-
-onMounted(() => {
-
 })
 </script>
 

@@ -1,28 +1,23 @@
 <script lang="ts" setup>
-
 import { useRecurringBillsStore } from '@/stores/recurring-bills'
-import { onMounted } from 'vue'
+import { formatCurrency } from '@/utils/currency'
 
-// TODO: REWIRE THE RECURRING VALUE
 const recurringBillsStore = useRecurringBillsStore()
-
-onMounted(() => {
-})
 </script>
 
 <template>
     <div class="bills-wrapper">
         <div class="bills-item paid">
             <span class="text">Paid Bills</span>
-            <span class="value">$190.00</span>
+            <span class="value">{{ formatCurrency(recurringBillsStore.paidBills.amount) }}</span>
         </div>
         <div class="bills-item total">
             <span class="text">Total Upcoming</span>
-            <span class="value">$194.00</span>
+            <span class="value">{{ formatCurrency(recurringBillsStore.totalUpcoming.amount) }}</span>
         </div>
         <div class="bills-item due">
             <span class="text">Due Soon</span>
-            <span class="value">$59.98</span>
+            <span class="value">{{ formatCurrency(recurringBillsStore.dueSoon.amount) }}</span>
         </div>
     </div>
 </template>

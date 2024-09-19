@@ -23,17 +23,17 @@ const sortOptions = [
 const recurringBillsStore = useRecurringBillsStore()
 
 const bills = computed(() => {
-    return recurringBillsStore.getSortedRecurringBills(sortBy.value).filter(t => t.name.toLowerCase().includes(searchInput.value.toLowerCase()))
+    return recurringBillsStore.getSortedRecurringBills(sortBy.value)
+                              .filter(t =>
+                                t.name.toLowerCase().includes(searchInput.value.toLowerCase()))
 })
 
-const filteredBills = computed(() => bills.value.filter(t => t.name.toLowerCase().includes(searchInput.value.toLowerCase())))
 
 onMounted(() => {
 })
 
 onUpdated(() => {
     recurringBillsStore.updateSummary(bills.value)
-    console.log(filteredBills.value)
 })
 </script>
 

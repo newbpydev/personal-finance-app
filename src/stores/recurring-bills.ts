@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { computed, onUpdated, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useTransactionStore } from '@/stores/transactions'
 import type { RecurringTransaction, Transaction } from '@/types/finance.type'
 import type { Sort } from '@/types/category.type'
@@ -26,32 +26,15 @@ export const useRecurringBillsStore = defineStore('recurring-bills', () => {
     return transactionsStore.getTransactionsByDate(7, 2024)
   })
 
-  const getSortedRecurringBills: RecurringTransaction[] = (sortBy: Sort) => {
+  const getSortedRecurringBills: RecurringTransaction[] = (sortBy: Sort = 'Latest') => {
     const recurringBillsList: RecurringTransaction[] = recurringBills.value.map(t => {
       const curDate = new Date()
       const isPaid = currentPaidBills.value.some(bill => bill.name === t.name)
-
-      // const bill = currentPaidBills.value.find(b => b.name === t.name)
-      // const bill = currentPaidBills.value.find(b => b.name === t.name)
       const todayDay = getDayOfMonth(curDate)
-      // const billDay = getDayOfMonth(new Date(bill?.date))
       const billDay = getDayOfMonth(new Date(t.date))
-      // const isDue = isNaN(billDay) ? true : todayDay >= billDay
       const isDue = todayDay >= billDay
-
       return { ...t, isPaid, isDue }
     })
-    console.log('⚡', recurringBillsList)
-
-    // updating totalBills
-    // totalBills.value = Math.abs(recurringBillsList.reduce((acc, t) => acc += t.amount, 0))
-    // recurringBillsList.forEach(t => {
-    //   if (t.isPaid) {
-    //     console.log(t.amount)
-    //     paidBills.value.count += 1
-    //     paidBills.value.amount += Math.abs(t.amount)
-    //   }
-    // })
 
     switch (sortBy) {
       case 'Oldest':
@@ -91,18 +74,9 @@ export const useRecurringBillsStore = defineStore('recurring-bills', () => {
     })
   }
 
-  // const getCurrent
-
-  onUpdated(() => {
-    // console.log(recurringBills.value)
-    // bills.forEach(t => {
-    //   console.log(t)
-    //   if (t.isPaid) {
-    //     console.log('in it')
-    //     paidBills.value.count++
-    //     paidBills.value.amount += Math.abs(t.amount)
-    //   }
-    // })
+  watch(recurringBills, () => {
+    const sortedBills = getSortedRecurringBills()
+    updateSummary(sortedBills)
   })
 
 
