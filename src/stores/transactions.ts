@@ -48,6 +48,7 @@ export const useTransactionStore = defineStore('transactions', () => {
 
   onUpdated(() => {
     recurringBillsStore.updateRecurringBills()
+    recurringBillsStore.getSortedRecurringBills('Latest')
   })
 
   watch(transactions, (newTransactions, oldTransactions) => {

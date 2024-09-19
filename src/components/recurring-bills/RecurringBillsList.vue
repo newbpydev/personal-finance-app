@@ -6,11 +6,9 @@ import SelectField from '@/components/inputs/SelectField.vue'
 import { useRecurringBillsStore } from '@/stores/recurring-bills'
 import { getDay } from '@/utils/dates'
 import { formatCurrency } from '@/utils/currency'
-import { useTransactionStore } from '@/stores/transactions'
 
 import PaidIcon from '@/assets/images/icon-bill-paid.svg'
 import DueIcon from '@/assets/images/icon-bill-due.svg'
-import type { RecurringTransaction } from '@/types/finance.type'
 
 const searchInput = ref('')
 const sortBy = ref('Latest')
@@ -23,38 +21,20 @@ const sortOptions = [
 ]
 
 const recurringBillsStore = useRecurringBillsStore()
-const transactionsStore = useTransactionStore()
-// const currentBillsPaid = computed(() => {
-//     return transactionsStore.getTransactionsByDate(5, 2024)
-// })
 
 const bills = computed(() => {
-    return recurringBillsStore.getSortedRecurringBills(sortBy)
+    return recurringBillsStore.getSortedRecurringBills(sortBy.value).filter(t => t.name.toLowerCase().includes(searchInput.value.toLowerCase()))
 })
 
-const isPastDate = (bill: RecurringTransaction) => {
-    const bDate = new Date(bill.date)
-    const todayDate = new Date()
-}
-
-
-// watch(sortBy, () => {
-//     // recurringBillsStore.sortRecurringBills(sortBy.value)
-// })
-
-console.log(bills.value)
+const filteredBills = computed(() => bills.value.filter(t => t.name.toLowerCase().includes(searchInput.value.toLowerCase())))
 
 onMounted(() => {
-    // recurringBillsStore.updateRecurringBills()
-    console.log(bills.value)
 })
 
 onUpdated(() => {
     recurringBillsStore.updateSummary(bills.value)
-
-
+    console.log(filteredBills.value)
 })
-
 </script>
 
 <template>

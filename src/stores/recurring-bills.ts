@@ -6,6 +6,7 @@ import type { Sort } from '@/types/category.type'
 
 
 const getDayOfMonth = (date: Date) => date.getDate()
+const defaultData = () => ({ count: 0, amount: 0 })
 
 export const useRecurringBillsStore = defineStore('recurring-bills', () => {
   const transactionsStore = useTransactionStore()
@@ -13,9 +14,9 @@ export const useRecurringBillsStore = defineStore('recurring-bills', () => {
   const recurringBills = ref<Transaction[]>([])
   const totalBills = ref(0)
 
-  const paidBills = ref<{ count: number, amount: number }>({ count: 0, amount: 0 })
-  const totalUpcoming = ref<{ count: number, amount: number }>({ count: 0, amount: 0 })
-  const dueSoon = ref<{ count: number, amount: number }>({ count: 0, amount: 0 })
+  const paidBills = ref<{ count: number, amount: number }>(defaultData())
+  const totalUpcoming = ref<{ count: number, amount: number }>(defaultData())
+  const dueSoon = ref<{ count: number, amount: number }>(defaultData())
 
   const updateRecurringBills = () => {
     recurringBills.value = transactionsStore.transactions.filter(t => t.recurring)
@@ -38,9 +39,9 @@ export const useRecurringBillsStore = defineStore('recurring-bills', () => {
       // const isDue = isNaN(billDay) ? true : todayDay >= billDay
       const isDue = todayDay >= billDay
 
-
       return { ...t, isPaid, isDue }
     })
+    console.log('⚡', recurringBillsList)
 
     // updating totalBills
     // totalBills.value = Math.abs(recurringBillsList.reduce((acc, t) => acc += t.amount, 0))
@@ -71,6 +72,10 @@ export const useRecurringBillsStore = defineStore('recurring-bills', () => {
   }
 
   const updateSummary = (bills: RecurringTransaction[]) => {
+    totalBills.value = 0
+    paidBills.value = defaultData()
+    totalUpcoming.value = defaultData()
+    dueSoon.value = defaultData()
     bills.forEach(t => {
       totalBills.value += Math.abs(t.amount)
       if (t.isPaid) {
@@ -89,15 +94,15 @@ export const useRecurringBillsStore = defineStore('recurring-bills', () => {
   // const getCurrent
 
   onUpdated(() => {
-    console.log(recurringBills.value)
-    bills.forEach(t => {
-      console.log(t)
-      if (t.isPaid) {
-        console.log('in it')
-        paidBills.value.count++
-        paidBills.value.amount += Math.abs(t.amount)
-      }
-    })
+    // console.log(recurringBills.value)
+    // bills.forEach(t => {
+    //   console.log(t)
+    //   if (t.isPaid) {
+    //     console.log('in it')
+    //     paidBills.value.count++
+    //     paidBills.value.amount += Math.abs(t.amount)
+    //   }
+    // })
   })
 
 
