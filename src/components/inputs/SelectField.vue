@@ -62,15 +62,15 @@ onBeforeUnmount(() => {
 <style lang="scss" scoped>
 @use "@/assets/styles/utils" as u;
 
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity .2s;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-    opacity: 0;
-}
+//.fade-enter-active,
+//.fade-leave-active {
+//    transition: opacity .2s;
+//}
+//
+//.fade-enter-from,
+//.fade-leave-to {
+//    opacity: 0;
+//}
 
 .select-field {
     flex-direction: column;
