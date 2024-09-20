@@ -62,16 +62,6 @@ onBeforeUnmount(() => {
 <style lang="scss" scoped>
 @use "@/assets/styles/utils" as u;
 
-//.fade-enter-active,
-//.fade-leave-active {
-//    transition: opacity .2s;
-//}
-//
-//.fade-enter-from,
-//.fade-leave-to {
-//    opacity: 0;
-//}
-
 .select-field {
     flex-direction: column;
     width: fit-content;
@@ -86,7 +76,6 @@ onBeforeUnmount(() => {
 }
 
 .select-label {
-    //display: flex;
     align-items: center;
     justify-content: flex-start;
     gap: var(--spacing-2);
@@ -121,20 +110,6 @@ onBeforeUnmount(() => {
         color: var(--c-grey-900);
         border: 1px solid var(--c-grey-500);
     }
-
-    //& .searchbar {
-    //    outline: none;
-    //    width: 100%;
-    //
-    //    &::placeholder {
-    //        color: var(--c-beige-500);
-    //    }
-    //
-    //    &:focus {
-    //        color: var(--c-grey-900);
-    //        //outline: 1px solid var(--c-grey-500);
-    //    }
-    //}
 }
 
 .option-list {
@@ -146,7 +121,6 @@ onBeforeUnmount(() => {
     border-radius: var(--spacing-2);
     box-shadow: 0 .4rem 2.4rem 0 rgba(0, 0, 0, .25);
     cursor: pointer;
-    //top: 6rem;
     @include u.responsive(top, 4.8rem, 6rem);
 
     & .list-item {
@@ -167,13 +141,6 @@ onBeforeUnmount(() => {
         &.active {
             @include u.text-preset-4-bold();
         }
-
-        //&::after {
-        //    content: '';
-        //    height: .1rem;
-        //    width: 100%;
-        //    background: var(--c-grey-100);
-        //}
     }
 }
 
