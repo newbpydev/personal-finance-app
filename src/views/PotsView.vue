@@ -1,6 +1,16 @@
 <script lang="ts" setup>
 
 import TheButton from '@/components/buttons/TheButton.vue'
+import { usePotsStore } from '@/stores/pots'
+import { onMounted } from 'vue'
+import PotCard from '@/components/pots/PotCard.vue'
+
+const potsStore = usePotsStore()
+
+onMounted(() => {
+    potsStore.fetchPots()
+})
+
 </script>
 
 <template>
@@ -13,10 +23,7 @@ import TheButton from '@/components/buttons/TheButton.vue'
         </header>
 
         <div class="cards">
-            <div class="card">card 1</div>
-            <div class="card">card 2</div>
-            <div class="card">card 3</div>
-            <div class="card">card 4</div>
+            <PotCard v-for="pot in potsStore.pots" :key="pot.id" :pot="pot" />
         </div>
     </main>
 </template>

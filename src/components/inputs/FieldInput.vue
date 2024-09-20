@@ -14,7 +14,7 @@ import SearchIcon from '@/assets/images/icon-search.svg'
         <span v-if="isCurrency && !isSearchbar" class="dollar-sign">$</span>
         <input v-if="isCurrency" id="currency" v-model="model" class="searchbar" name="currency" step=".01"
                type="number">
-        <input v-else v-model="model" :placeholder="placeholder" class="searchbar" type="text">
+        <input v-else v-model="model" :placeholder="placeholder" class="searchbar" type="search">
         <SearchIcon v-if="isSearchbar && !isCurrency" class="search-icon" />
     </label>
 </template>
