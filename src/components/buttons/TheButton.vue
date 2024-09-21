@@ -15,9 +15,11 @@ defineProps<{
 
 .btn {
     display: flex;
+    justify-content: space-evenly;
     padding: var(--spacing-4);
     border-radius: var(--spacing-2);
     color: var(--c-white);
+
     transition: all .2s;
     @include u.text-preset-4-bold();
 
