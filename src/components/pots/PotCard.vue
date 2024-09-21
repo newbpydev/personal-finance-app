@@ -34,11 +34,9 @@ const percentage = computed(() => {
             </div>
 
             <div class="progress">
-                <!--                <progress id="total-saved" :max="pot.target" :style="{color: pot.theme}" :value="pot.total"-->
-                <!--                          aria-label="total saved progress bar"-->
-                <!--                          class="total-saved" />-->
-                <div class="progressbar">
-                    <div :style="{width: `${percentage}%`, background: pot.theme}" class="progressbar-value"></div>
+                <div class="progressbar" role="progressbar">
+                    <div :style="{width: `${percentage}%`, background: pot.theme}" class="progressbar-value"
+                         role="progressbar"></div>
                 </div>
 
                 <div class="stat">
@@ -115,19 +113,6 @@ const percentage = computed(() => {
             flex-direction: column;
             gap: 1.3rem;
             color: var(--c-grey-500);
-
-            //& .total-saved {
-            //    appearance: none;
-            //    border-radius: .4rem;
-            //    width: 100%;
-            //
-            //    &[value] {
-            //        appearance: none;
-            //        -webkit-appearance: none;
-            //        height: .8rem;
-            //        border-radius: .4rem;
-            //    }
-            //}
 
             & .progressbar {
                 height: .8rem;
