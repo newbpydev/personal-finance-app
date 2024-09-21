@@ -35,7 +35,9 @@ const percentage = computed(() => {
 
             <div class="progress">
                 <div class="progressbar" role="progressbar">
-                    <div :style="{width: `${percentage}%`, background: pot.theme}" class="progressbar-value"
+                    <!--                    TODO: Review the transition values when the form is ready to edit-->
+                    <div :style="{width: `${percentage}%`, background: pot.theme, transition: 'width .3s'}"
+                         class="progressbar-value"
                          role="progressbar"></div>
                 </div>
 
@@ -121,7 +123,9 @@ const percentage = computed(() => {
 
                 &-value {
                     height: 100%;
+                    width: 0;
                     border-radius: .4rem;
+                    transition: all .5s;
                 }
             }
 
