@@ -30,6 +30,7 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 @use '@/assets/styles/utils' as u;
+@use '@/assets/styles/variables' as v;
 
 header {
     display: flex;
@@ -41,9 +42,12 @@ header {
 
 .cards {
     display: grid;
-    //grid-template-columns: 1fr;
     gap: var(--spacing-6);
-    @include u.responsive(grid-template-columns, 1fr, null, 1fr 1fr);
+    grid-template-columns: 1fr;
+    @media (min-width: v.$laptop-lg-width) {
+        grid-template-columns: 1fr 1fr;
+    }
+
 }
 
 </style>
